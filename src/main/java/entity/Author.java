@@ -5,13 +5,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Book {
+public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    @ManyToMany(mappedBy = "books")
-    private Set<Author> authors = new HashSet<Author>();
+    @ManyToMany
+    private Set<Book> books = new HashSet<Book>();
 
     public Integer getId() {
         return id;
@@ -29,12 +29,11 @@ public class Book {
         this.name = name;
     }
 
-    public Set<Author> getAuthors() {
-        return authors;
+    public Set<Book> getBooks() {
+        return books;
     }
 
-    public void addAuthor(Author author) {
-        this.authors.add(author);
-        author.getBooks().add(this);
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 }
